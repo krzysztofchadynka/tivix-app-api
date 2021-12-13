@@ -3,6 +3,7 @@ version: '3.8'
 services:
     mysql:
         image: mysql
+        platform: linux/x86_64
         container_name: tivix_app_mysql
         ports:
             - "3308:3306"
@@ -27,6 +28,7 @@ services:
 
     nginx:
         image: nginx:alpine
+        platform: linux/x86_64
         container_name: tivix_app_nginx
         ports:
             - "80:80"
