@@ -1,0 +1,46 @@
+version: '3.8'
+
+services:
+    mysql:
+        image: mysql
+        container_name: tivix_app_mysql
+        ports:
+            - "3308:3306"
+        env_file:
+            - .env
+        volumes:
+            - dbdata:/var/lib/mysql/
+        networks:
+            - tivix-app-network
+
+    php:
+        build: ./.docker/php
+        image: digitalocean.com/php
+        container_name: tivix_app_php
+        env_file:
+            - .env
+        working_dir: /var/www/tivix-api
+        volumes:
+            - ./:/var/www/tivix-api
+        networks:
+            - tivix-app-network
+
+    nginx:
+        image: nginx:alpine
+        container_name: tivix_app_nginx
+        ports:
+            - "80:80"
+        volumes:
+            - ./:/var/www/tivix-api
+            - ./.docker/nginx/conf.d/:/etc/nginx/conf.d
+        networks:
+            - tivix-app-network
+
+
+networks:
+    tivix-app-network:
+        driver: bridge
+
+volumes:
+    dbdata:
+        driver: local
