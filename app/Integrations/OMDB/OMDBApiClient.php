@@ -3,18 +3,21 @@
 namespace App\Integrations\OMDB;
 
 use App\Integrations\OMDB\Enums\PositionTypeEnum;
-use App\Integrations\OMDB\Mappers\ApiResponseMapper;
+use App\Integrations\OMDB\Mappers\ApiListResponseMapper;
+use App\Integrations\OMDB\Traits\SendsRequestTrait;
 use GuzzleHttp\Client as HttpClient;
 use GuzzleHttp\Exception\GuzzleException;
 
 class OMDBApiClient
 {
+    use SendsRequestTrait;
+
     private HttpClient $httpClient;
-    private ApiResponseMapper $responseMapper;
+    private ApiListResponseMapper $responseMapper;
     private string $apiKey;
     private string $apiBaseUrl;
 
-    public function __construct(HttpClient $httpClient, ApiResponseMapper $responseMapper)
+    public function __construct(HttpClient $httpClient, ApiListResponseMapper $responseMapper)
     {
         $this->httpClient = $httpClient;
         $this->responseMapper = $responseMapper;
@@ -26,22 +29,7 @@ class OMDBApiClient
 
     public function getMovies(string $title, ?int $year = null): array
     {
-        try {
-            $result = $this->httpClient->get($this->apiBaseUrl, [
-                'query' => [
-                    'apiKey' => $this->apiKey,
-                    's' => $title,
-                    'type' => PositionTypeEnum::MOVIE,
-                ],
-            ]);
-
-            return $this->responseMapper->map($result->getBody()->getContents());
-        } catch (GuzzleException $e) {
-            $exceptionContent = json_decode($e->getResponse()->getBody()->getContents(), true);
-            $exceptionMessage = $exceptionContent['Error'] ?? null;
-
-            throw new \Exception($exceptionMessage, $e->getCode());
-        }
+        return $this->getList($title, PositionTypeEnum::MOVIE, $year);
     }
 
     public function getEpisodes()

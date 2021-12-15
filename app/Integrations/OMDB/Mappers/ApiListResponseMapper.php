@@ -5,7 +5,7 @@ namespace App\Integrations\OMDB\Mappers;
 use App\Integrations\OMDB\Transformers\ApiListResponseTransformer;
 use App\Integrations\ResponseMapperInterface;
 
-class ApiResponseMapper implements ResponseMapperInterface
+class ApiListResponseMapper implements ResponseMapperInterface
 {
     public function map(string $jsonResponse): array
     {
