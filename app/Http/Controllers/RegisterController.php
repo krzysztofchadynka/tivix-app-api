@@ -25,15 +25,9 @@ class RegisterController extends Controller
                 $request->get('password'),
             );
 
-            return response()->json([
-                'state' => Response::HTTP_CREATED,
-                'user_id' => $user->id,
-            ], Response::HTTP_CREATED);
+            return $this->jsonResponse(Response::HTTP_CREATED, ['userId' => $user->id]);
         } catch (\Exception $e) {
-            return response()->json([
-                'state' => $e->getCode(),
-                'message' => $e->getMessage(),s
-            ], $e->getCode());
+            return $this->jsonResponse($e->getCode(), null, $e->getMessage());
         }
     }
 }

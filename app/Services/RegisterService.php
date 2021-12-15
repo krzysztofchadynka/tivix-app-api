@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Models\User;
 use App\Repositories\UserRepository;
+use Illuminate\Support\Facades\Hash;
 
 class RegisterService
 {
@@ -19,7 +20,7 @@ class RegisterService
         return $this->userRepository->create([
             'name' => $name,
             'email' => $email,
-            'password' => $password,
+            'password' => Hash::make($password),
         ]);
     }
 }
