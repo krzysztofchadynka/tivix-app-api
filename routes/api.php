@@ -26,6 +26,9 @@ $route->group(['middleware' => 'auth:sanctum'], static function (Router $route) 
 
         $route->get('/series/{title}/{year?}', [OMDBController::class, 'getSeries'])
             ->name('tivix.omdb.get_series');
+
+        $route->get('/position/{id}', [OMDBController::class, 'getPosition'])
+            ->name('tivix.omdb.get_position');
     });
 });
 

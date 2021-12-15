@@ -24,6 +24,22 @@ trait SendsRequestTrait
         }
     }
 
+    public function getPosition(string $id): array
+    {
+        try {
+            $result = $this->httpClient->get($this->apiBaseUrl, [
+                'query' => [
+                    'apiKey' => $this->apiKey,
+                    'i' => $id,
+                ],
+            ]);
+
+            return json_decode($result->getBody()->getContents(), true);
+        } catch (GuzzleException $e) {
+            $this->throwException($e);
+        }
+    }
+
     private function throwException(GuzzleException $e): \Exception
     {
         $exceptionContent = json_decode($e->getResponse()->getBody()->getContents(), true);

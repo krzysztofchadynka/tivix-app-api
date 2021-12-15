@@ -19,9 +19,10 @@ class OMDBController extends Controller
     public function getMovies(string $title, ?int $year = null): JsonResponse
     {
         try {
-            $movies = $this->apiClient->getMovies($title, $year);
-
-            return $this->jsonResponse(Response::HTTP_OK, $movies);
+            return $this->jsonResponse(
+                Response::HTTP_OK,
+                $this->apiClient->getMovies($title, $year)
+            );
         } catch (\Exception $e) {
             return $this->jsonResponse($e->getCode(), null, $e->getMessage());
         }
@@ -30,9 +31,10 @@ class OMDBController extends Controller
     public function getEpisodes(string $title, ?int $year = null): JsonResponse
     {
         try {
-            $movies = $this->apiClient->getEpisodes($title, $year);
-
-            return $this->jsonResponse(Response::HTTP_OK, $movies);
+            return $this->jsonResponse(
+                Response::HTTP_OK,
+                $this->apiClient->getEpisodes($title, $year),
+            );
         } catch (\Exception $e) {
             return $this->jsonResponse($e->getCode(), null, $e->getMessage());
         }
@@ -41,9 +43,22 @@ class OMDBController extends Controller
     public function getSeries(string $title, ?int $year = null): JsonResponse
     {
         try {
-            $movies = $this->apiClient->getSeries($title, $year);
+            return $this->jsonResponse(
+                Response::HTTP_OK,
+                $this->apiClient->getSeries($title, $year)
+            );
+        } catch (\Exception $e) {
+            return $this->jsonResponse($e->getCode(), null, $e->getMessage());
+        }
+    }
 
-            return $this->jsonResponse(Response::HTTP_OK, $movies);
+    public function getPosition(string $id): JsonResponse
+    {
+        try {
+            return $this->jsonResponse(
+                Response::HTTP_OK,
+                $this->apiClient->getPosition($id)
+            );
         } catch (\Exception $e) {
             return $this->jsonResponse($e->getCode(), null, $e->getMessage());
         }

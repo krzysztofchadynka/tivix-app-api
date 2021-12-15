@@ -2,7 +2,6 @@
 
 namespace App\Integrations\OMDB\Mappers;
 
-use App\Integrations\OMDB\Transformers\ApiListResponseTransformer;
 use App\Integrations\ResponseMapperInterface;
 
 class ApiListResponseMapper implements ResponseMapperInterface
