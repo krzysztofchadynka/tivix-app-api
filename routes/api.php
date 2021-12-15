@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\OMDBController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\UserController;
 use Illuminate\Routing\Router;
@@ -14,6 +15,11 @@ $route->group(['middleware' => 'auth:sanctum'], static function (Router $route) 
             ->name('tivix.user.get_data');
         $route->post('/logout', [AuthController::class, 'logout'])
             ->name('tivix.user.logout');
+    });
+
+    Route::prefix('omdb')->group(function () use ($route) {
+        $route->get('/movies/{title}/{year?}', [OMDBController::class, 'getMovies'])
+            ->name('tivix.omdb.get_movies', []);
     });
 });
 
