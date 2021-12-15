@@ -37,9 +37,9 @@ class OMDBApiClient
         return $this->getList($title, PositionTypeEnum::EPISODE, $year);
     }
 
-    public function getSeries()
+    public function getSeries(string $title, ?int $year = null): array
     {
-
+        return $this->getList($title, PositionTypeEnum::SERIES, $year);
     }
 
     public function getPositionById()

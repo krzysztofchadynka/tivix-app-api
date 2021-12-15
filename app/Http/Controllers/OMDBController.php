@@ -27,10 +27,21 @@ class OMDBController extends Controller
         }
     }
 
-    public function getEpisodes(string $title, ?int $year): JsonResponse
+    public function getEpisodes(string $title, ?int $year = null): JsonResponse
     {
         try {
             $movies = $this->apiClient->getEpisodes($title, $year);
+
+            return $this->jsonResponse(Response::HTTP_OK, $movies);
+        } catch (\Exception $e) {
+            return $this->jsonResponse($e->getCode(), null, $e->getMessage());
+        }
+    }
+
+    public function getSeries(string $title, ?int $year = null): JsonResponse
+    {
+        try {
+            $movies = $this->apiClient->getSeries($title, $year);
 
             return $this->jsonResponse(Response::HTTP_OK, $movies);
         } catch (\Exception $e) {
