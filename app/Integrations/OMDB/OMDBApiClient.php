@@ -13,14 +13,14 @@ class OMDBApiClient
     use SendsRequestTrait;
 
     private HttpClient $httpClient;
-    private ApiListResponseMapper $responseMapper;
+    private ResponseMapperFactory $mapperFactory;
     private string $apiKey;
     private string $apiBaseUrl;
 
-    public function __construct(HttpClient $httpClient, ApiListResponseMapper $responseMapper)
+    public function __construct(HttpClient $httpClient, ResponseMapperFactory $mapperFactory)
     {
         $this->httpClient = $httpClient;
-        $this->responseMapper = $responseMapper;
+        $this->mapperFactory = $mapperFactory;
 
         $omdbConfig = config('tivix.integrations.omdb');
         $this->apiKey = $omdbConfig['api_key'];

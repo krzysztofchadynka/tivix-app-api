@@ -2,6 +2,7 @@
 
 namespace App\Integrations\OMDB\Traits;
 
+use App\Integrations\OMDB\Enums\ResultTypeEnum;
 use GuzzleHttp\Exception\GuzzleException;
 
 trait SendsRequestTrait
@@ -18,7 +19,9 @@ trait SendsRequestTrait
                 ],
             ]);
 
-            return $this->responseMapper->map($result->getBody()->getContents());
+            $mapper = $this->mapperFactory->getInstance(ResultTypeEnum::LIST);
+
+            return $mapper->map($result->getBody()->getContents());
         } catch (GuzzleException $e) {
             $this->throwException($e);
         }
@@ -34,7 +37,9 @@ trait SendsRequestTrait
                 ],
             ]);
 
-            return json_decode($result->getBody()->getContents(), true);
+            $mapper = $this->mapperFactory->getInstance(ResultTypeEnum::POSITION);
+
+            return $mapper->map($result->getBody()->getContents());
         } catch (GuzzleException $e) {
             $this->throwException($e);
         }
