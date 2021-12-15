@@ -1,22 +1,25 @@
 <?php
 
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\RegisterController;
-use Illuminate\Http\Request;
+use App\Http\Controllers\UserController;
+use Illuminate\Routing\Router;
 use Illuminate\Support\Facades\Route;
 
-/*
-|--------------------------------------------------------------------------
-| API Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register API routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| is assigned the "api" middleware group. Enjoy building your API!
-|
-*/
+$route = app(Router::class);
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+$route->group(['middleware' => 'auth:sanctum'], static function (Router $route) {
+    Route::prefix('user')->group(function () use ($route) {
+        $route->get('/data', [UserController::class, 'getUserData'])
+            ->name('tivix.user.get_data');
+        $route->post('/logout', [AuthController::class, 'logout'])
+            ->name('tivix.user.logout');
+    });
 });
 
-Route::post('/user/register', [RegisterController::class, 'register']);
+Route::prefix('user')->group(function () use ($route) {
+    $route->post('/register', [RegisterController::class, 'register'])
+        ->name('tivix.user.register');
+    $route->post('/login', [AuthController::class, 'login'])
+        ->name('tivix.user.login');
+});
