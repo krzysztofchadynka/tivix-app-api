@@ -32,9 +32,9 @@ class OMDBApiClient
         return $this->getList($title, PositionTypeEnum::MOVIE, $year);
     }
 
-    public function getEpisodes()
+    public function getEpisodes(string $title, ?int $year = null): array
     {
-
+        return $this->getList($title, PositionTypeEnum::EPISODE, $year);
     }
 
     public function getSeries()

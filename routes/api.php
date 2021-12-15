@@ -19,7 +19,10 @@ $route->group(['middleware' => 'auth:sanctum'], static function (Router $route) 
 
     Route::prefix('omdb')->group(function () use ($route) {
         $route->get('/movies/{title}/{year?}', [OMDBController::class, 'getMovies'])
-            ->name('tivix.omdb.get_movies', []);
+            ->name('tivix.omdb.get_movies');
+
+        $route->get('/episodes/{title}/{year?}', [OMDBController::class, 'getEpisodes'])
+            ->name('tivix.omdb.get_episodes');
     });
 });
 
