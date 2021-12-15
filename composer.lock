@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "d4842c22e789d247c4b660e69490545f",
+    "content-hash": "744520a4bd22833efb073ff0e05773d8",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -61,6 +61,87 @@
                 "source": "https://github.com/asm89/stack-cors/tree/v2.0.3"
             },
             "time": "2021-03-11T06:42:03+00:00"
+        },
+        {
+            "name": "awes-io/repository",
+            "version": "v1.1.8",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/awes-io/repository.git",
+                "reference": "6835ce5ba805a7075fb64fd7db36093a95e2b6ad"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/awes-io/repository/zipball/6835ce5ba805a7075fb64fd7db36093a95e2b6ad",
+                "reference": "6835ce5ba805a7075fb64fd7db36093a95e2b6ad",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/support": "~5|~6|~7|~8"
+            },
+            "require-dev": {
+                "mockery/mockery": "^1.1",
+                "orchestra/testbench": "~3.0",
+                "phpunit/phpunit": "~7.0",
+                "sempro/phpunit-pretty-print": "^1.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "AwesIO\\Repository\\RepositoryServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "AwesIO\\Repository\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Awescode GmbH",
+                    "email": "info@awescode.de",
+                    "homepage": "https://www.awescode.de",
+                    "role": "Owner"
+                },
+                {
+                    "name": "Galymzhan Begimov",
+                    "email": "begimov@gmail.com",
+                    "homepage": "https://github.com/begimov"
+                }
+            ],
+            "description": "Implementation of repository pattern for Laravel. The package allows out-of-the-box filtering of data based on parameters in the <b>request</b>, and also allows you to quickly integrate the list filters and custom criteria.",
+            "homepage": "https://github.com/awes-io/repository",
+            "keywords": [
+                "criteria",
+                "filters",
+                "laravel",
+                "pattern",
+                "php",
+                "repository",
+                "scope"
+            ],
+            "support": {
+                "email": "support@awescode.de",
+                "issues": "https://github.com/awes-io/repository/issues",
+                "source": "https://github.com/awes-io/repository/tree/v1.1.8"
+            },
+            "funding": [
+                {
+                    "url": "https://opencollective.com/awesdotio",
+                    "type": "open_collective"
+                },
+                {
+                    "url": "https://www.patreon.com/awesdotio",
+                    "type": "patreon"
+                }
+            ],
+            "time": "2021-06-01T13:34:52+00:00"
         },
         {
             "name": "brick/math",
