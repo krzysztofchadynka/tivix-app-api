@@ -3,16 +3,23 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\UserController;
+use Illuminate\Routing\Router;
 use Illuminate\Support\Facades\Route;
 
-Route::prefix('user')->group(function () {
-    Route::post('/register', [RegisterController::class, 'register'])
-        ->name('tivix.user.register');
-    Route::post('/login', [AuthController::class, 'login'])
-        ->name('tivix.user.login');
+$route = app(Router::class);
 
-    Route::middleware('auth:sanctum')
-        ->get('/data', [UserController::class, 'getUserData'])
-        ->name('tivix.user.get_data');
+$route->group(['middleware' => 'auth:sanctum'], static function (Router $route) {
+    Route::prefix('user')->group(function () use ($route) {
+        $route->get('/data', [UserController::class, 'getUserData'])
+            ->name('tivix.user.get_data');
+        $route->post('/logout', [AuthController::class, 'logout'])
+            ->name('tivix.user.logout');
+    });
 });
 
+Route::prefix('user')->group(function () use ($route) {
+    $route->post('/register', [RegisterController::class, 'register'])
+        ->name('tivix.user.register');
+    $route->post('/login', [AuthController::class, 'login'])
+        ->name('tivix.user.login');
+});
