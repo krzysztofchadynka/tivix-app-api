@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
 use App\Integrations\OMDB\Http\Requests\PositionRequest;
 use App\Integrations\OMDB\OMDBApiClient;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Response;
 
-class OMDBController extends Controller
+class OMDBController extends ApiController
 {
     private OMDBApiClient $apiClient;
 
