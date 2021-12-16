@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
 use App\Http\Requests\RegisterRequest;
 use App\Services\RegisterService;
 use Illuminate\Http\Response;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
-class RegisterController extends Controller
+class RegisterController extends ApiController
 {
     private RegisterService $registerService;
 
