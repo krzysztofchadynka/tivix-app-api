@@ -7,3 +7,6 @@ php artisan db:seed
 php artisan key:generate
 php artisan cache:clear
 php artisan route:cache
+npm install
+npm ci
+npm run dev
