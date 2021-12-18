@@ -29,3 +29,7 @@ Change `server_name` value to `tivix-app.local` and `root` to `/var/www/tivix-ap
 
 Then front part of application should be available on `http://tivix-app.local/` and API
 should be available on `http://tivix-app.local/api`.
+
+Sample log in data are:
+email: test-user@tivix.com
+password: test1234
